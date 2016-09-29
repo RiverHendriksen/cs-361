@@ -14,5 +14,10 @@ assert(Kwic.Kwic(test2)==[])
 
 test3 = "woah  oh oh        yeah"
 print Kwic.Kwic(test3)
-assert(Kwic.Kwic(test3)==["woah","oh","oh","yeah"])
+expectedLen = 4
+assert len(Kwic.Kwic(test3)) >= expectedLen
+
+test4 = "         " 
+assert(Kwic.Kwic(test4)==[])
+
 
