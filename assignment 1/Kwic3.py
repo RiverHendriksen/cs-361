@@ -28,6 +28,21 @@ def circshift(x2,x3):
 		x3.append(x2[:])
 	return x3
 
+def tupleheck(x3,n,i):
+	for j in range(len(x3)):
+		if len(n) == 0:
+			thattuple = (x3[j], )
+			thattuple2 = (i, )
+			thattuple3 = thattuple + thattuple2
+			n.append(thattuple3)
+		elif len(n[j-1]) == 2:
+			thattuple = (x3[j], )
+			thattuple2 = (i, )
+			thattuple3 = thattuple + thattuple2
+			n.append(thattuple3)
+	return n
+
+
 #main function
 def Kwic(x1):
 	x2 = []		#will hold those dank lists
@@ -44,18 +59,7 @@ def Kwic(x1):
 			bewlist.append(deepcopy(x1[i]))
 			x2 = wordsplits(bewlist[i])
 			x3 = circshift(x2,x3)
-
-			for j in range(len(x3)):
-				if len(n) == 0:
-					thattuple = (x3[j], )
-					thattuple2 = (i, )
-					thattuple3 = thattuple + thattuple2
-					n.append(thattuple3)
-				elif len(n[j-1]) == 2:
-					thattuple = (x3[j], )
-					thattuple2 = (i, )
-					thattuple3 = thattuple + thattuple2
-					n.append(thattuple3)
+			n = tupleheck(x3,n,i)
 		print n
 		return n;
 
@@ -72,6 +76,18 @@ def Kwic(x1):
 	#it does the same thing as wordsplits but does it for strings rather than lists
 	elif(x1.isspace()==False):
 		x2 += x1.split(" ")
+
 		x2 = filter(lambda c:c != '', x2)
+
 		x3 = circshift(x2,x3)
-		return x3;
+
+		for j in range(len(x3)):	#The lazy mans code, it does the same thing as tupleheck but no longer requires I, if you are curious check tupleheck
+			thattuple = (x3[j], )
+			thattuple2 = (0,)
+			thattuple3 = thattuple + thattuple2
+			n.append(thattuple3)
+		print n 
+
+		return n
+
+
