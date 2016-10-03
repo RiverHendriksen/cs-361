@@ -42,7 +42,6 @@ def tupleheck(x3,n,i):
 			n.append(thattuple3)
 	return n
 
-
 #main function
 def Kwic(x1):
 	x2 = []		#will hold those dank lists
@@ -60,8 +59,11 @@ def Kwic(x1):
 			x2 = wordsplits(bewlist[i])
 			x3 = circshift(x2,x3)
 			n = tupleheck(x3,n,i)
-		print n
-		return n;
+		
+		sorted_by_first = sorted(n, key=lambda tup: tup[0][0][0].lower())
+		
+		print sorted_by_first
+		return sorted_by_first;
 
 	#I realized that .isspace comes out to False is there is an empty string to quote the python method defintion
 	#"This method returns true if there are only whitespace characters in the string and there is at least one character, false otherwise."
@@ -86,9 +88,7 @@ def Kwic(x1):
 			thattuple2 = (0,)
 			thattuple3 = thattuple + thattuple2
 			n.append(thattuple3)
+		sorted_by_first = sorted(n, key=lambda tup: tup[0][0][0].lower())
 
-		print n 
-
-		return n
-
-
+		print sorted_by_first
+		return sorted_by_first

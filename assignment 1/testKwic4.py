@@ -28,3 +28,7 @@ assert(Kwic.Kwic(test4)==[])
 test5 = "hey budyy"
 expectedLen = len(filter(lambda c:c == "\n", test5))  #referenced from comment Alex groce made on discussions :-)
 assert len(Kwic.Kwic(test5)) >= expectedLen
+
+test5 = "A a \n Apple bottom JEansS "
+expectedLen = len(filter(lambda c:c == "\n", test5))  #referenced from comment Alex groce made on discussions :-)
+assert len(Kwic.Kwic(test5)) >= expectedLen
