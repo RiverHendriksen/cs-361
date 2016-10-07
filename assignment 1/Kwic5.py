@@ -1,7 +1,6 @@
-
 #River Hendriksen 2016
 #CS-361 Assignment 1
-#Kwic5.py
+#Kwic1.py
 #This refactors and adds code to make for the more complex function where the string is now split by lines and words
 #Kwic0.py is still relevent but edited heavily to accomodate more features
 
@@ -23,6 +22,7 @@ def deepcopy(x2):
 	return newList
 
 def circshift(x2,x3):
+
 	for i in range(0,len(x2)):
 		x2.append(x2[0])
 		del x2[0]
@@ -30,6 +30,7 @@ def circshift(x2,x3):
 	return x3
 
 def tupleheck(x3,n,i):
+
 	for j in range(len(x3)):
 		if len(n) == 0:
 			thattuple = (x3[j], )
@@ -42,23 +43,34 @@ def tupleheck(x3,n,i):
 			thattuple3 = thattuple + thattuple2
 			n.append(thattuple3)
 	return n
+
 def try_to_ignore_me(sorted_by_first, ignoreWords):
+	#create ironic list name  
 	ignore_perfection = []	
-			#first for loop, the range of the length of ignorewords (aka how many words did you say to ignore) iterates through it
+
+	#first for loop, the range of the length of ignorewords (aka how many words did you say to ignore) iterates through it
 	for i in range(len(ignoreWords)):
-				#print len(ignoreWords)	
-				#second for loop, the range of the length of the sorted tuple list iterates throught it 						
+
+		#second for loop, the range of the length of the sorted tuple list iterates throught it 						
 		for x in range(len(sorted_by_first)):
-					#dem error checks
-					#print ignoreWords
-					#if the sorted list at the current iteration of the tuple at the list at the first string of the list is equal to the value of ignoreword
-			if(sorted_by_first[x][0][0].lower() == ignoreWords[i].lower()):
-						#create ironic list name that takes sorted first and then deletes the value that matches ignore words off it. 
+
+			#referenced from: http://stackoverflow.com/questions/16050952/how-to-remove-all-the-punctuation-in-a-string-python
+			#creates a new string without punctuation
+			out = "".join(c for c in sorted_by_first[x][0][0] if c not in ('.', '?', ',', '!', ':')) 
+
+			#if the sorted list at the current iteration of the tuple at the list at the first string of the list is equal to the value of ignoreword
+			if(out.lower() == ignoreWords[i].lower()):
+				#checks to see if ignore_perfection is empty
 				if(ignore_perfection == []):
+					#copys sorted perfection in the append way, had to do this because otherwise we would be editing the list that we are iterating through
+					#and that is a big fat mistake
 					ignore_perfection += sorted_by_first
-				print ignore_perfection
+				#removes the tuple if the words match
 				ignore_perfection.remove(sorted_by_first[x])
-				print ignore_perfection
+
+	#if there was an ignore in the function but nothing matches we just return sorted by first
+	if(ignore_perfection == []):
+		return sorted_by_first
 	return ignore_perfection
 
 
@@ -84,14 +96,13 @@ def Kwic(x1, ignoreWords = []):
 		
 		sorted_by_first = sorted(n, key=lambda tup: tup[0][0][0].lower())
 
-		print sorted_by_first
+		#print sorted_by_first
 
 		if(ignoreWords != []):
 			ignore_perfection = try_to_ignore_me(sorted_by_first, ignoreWords)
-			print "here you "
+			#print "here you "
 			print ignore_perfection
 			return ignore_perfection;
-		
 		return sorted_by_first;
 		
 
@@ -122,8 +133,6 @@ def Kwic(x1, ignoreWords = []):
 		
 		if(ignoreWords != []):
 			ignore_perfection = try_to_ignore_me(sorted_by_first, ignoreWords)
-			print "here you "
-			print ignore_perfection
 			return ignore_perfection;
 		
 		return sorted_by_first;

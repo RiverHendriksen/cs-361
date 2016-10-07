@@ -22,6 +22,7 @@ def deepcopy(x2):
 	return newList
 
 def circshift(x2,x3):
+
 	for i in range(0,len(x2)):
 		x2.append(x2[0])
 		del x2[0]
@@ -29,6 +30,7 @@ def circshift(x2,x3):
 	return x3
 
 def tupleheck(x3,n,i):
+
 	for j in range(len(x3)):
 		if len(n) == 0:
 			thattuple = (x3[j], )
@@ -42,12 +44,50 @@ def tupleheck(x3,n,i):
 			n.append(thattuple3)
 	return n
 
+def try_to_ignore_me(sorted_by_first, ignoreWords):
+	#create ironic list name  
+	ignore_perfection = []	
+
+	#first for loop, the range of the length of ignorewords (aka how many words did you say to ignore) iterates through it
+	for i in range(len(ignoreWords)):
+
+		#second for loop, the range of the length of the sorted tuple list iterates throught it 						
+		for x in range(len(sorted_by_first)):
+
+			#referenced from: http://stackoverflow.com/questions/16050952/how-to-remove-all-the-punctuation-in-a-string-python
+			#creates a new string without punctuation
+			out = "".join(c for c in sorted_by_first[x][0][0] if c not in ('.', '?', ',', '!', ':')) 
+
+			#if the sorted list at the current iteration of the tuple at the list at the first string of the list is equal to the value of ignoreword
+			if(out.lower() == ignoreWords[i].lower()):
+				#checks to see if ignore_perfection is empty
+				if(ignore_perfection == []):
+					#copys sorted perfection in the append way, had to do this because otherwise we would be editing the list that we are iterating through
+					#and that is a big fat mistake
+					ignore_perfection += sorted_by_first
+				#removes the tuple if the words match
+				ignore_perfection.remove(sorted_by_first[x])
+
+	#if there was an ignore in the function but nothing matches we just return sorted by first
+	if(ignore_perfection == []):
+		return sorted_by_first
+	return ignore_perfection
+
+def listpairheck(sorted_by_first):
+	for i in range(len(sorted_by_first)):
+		a = sorted_by_first[i][0][0]
+		if(a in sorted_by_first):
+			print "fuck you"
+
+
 #main function
-def Kwic(x1, *):
+def Kwic(x1, ignoreWords = []):
+	#print ignoreWords
 	x2 = []		#will hold those dank lists
 	x3 = []
 	n = []
 	bewlist = []
+	sorted_by_first = []
 
 	if("\n" in x1):
 		x1 = x1.splitlines()	#default function from python to split lines by \n eg. "hello\nbutton" returns ['hello','button']
@@ -61,9 +101,16 @@ def Kwic(x1, *):
 			n = tupleheck(x3,n,i)
 		
 		sorted_by_first = sorted(n, key=lambda tup: tup[0][0][0].lower())
-		
-		print sorted_by_first
+
+		#print sorted_by_first
+
+		if(ignoreWords != []):
+			ignore_perfection = try_to_ignore_me(sorted_by_first, ignoreWords)
+			#print "here you "
+			print ignore_perfection
+			return ignore_perfection;
 		return sorted_by_first;
+		
 
 	#I realized that .isspace comes out to False is there is an empty string to quote the python method defintion
 	#"This method returns true if there are only whitespace characters in the string and there is at least one character, false otherwise."
@@ -89,6 +136,10 @@ def Kwic(x1, *):
 			thattuple3 = thattuple + thattuple2
 			n.append(thattuple3)
 		sorted_by_first = sorted(n, key=lambda tup: tup[0][0][0].lower())
+		
+		if(ignoreWords != []):
+			ignore_perfection = try_to_ignore_me(sorted_by_first, ignoreWords)
+			return ignore_perfection;
+		
+		return sorted_by_first;
 
-		print sorted_by_first
-		return sorted_by_first

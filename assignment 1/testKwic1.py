@@ -37,3 +37,4 @@ assert(Kwic.Kwic(test4)==[])
 test5 = "hey hey \n this is not the way \n back"
 
 
+
