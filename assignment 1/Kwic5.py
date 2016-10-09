@@ -73,7 +73,6 @@ def try_to_ignore_me(sorted_by_first, ignoreWords):
 		return sorted_by_first
 	return ignore_perfection
 
-
 #main function
 def Kwic(x1, ignoreWords = []):
 	#print ignoreWords

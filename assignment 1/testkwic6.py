@@ -47,7 +47,7 @@ assert len(Kwic.Kwic(test10, ignoreWords = ['is'], listPairs = True)) >= expecte
 #add to other Kwic and maybe test7 style 
 assert Kwic.Kwic("hello here, hello there, hello everywhere",listPairs = True) == ([(['everywhere', 'hello', 'here,', 'hello', 'there,', 'hello'], 0), (['hello', 'everywhere', 'hello', 'here,', 'hello', 'there,'], 0), (['hello', 'here,', 'hello', 'there,', 'hello', 'everywhere'], 0), (['hello', 'there,', 'hello', 'everywhere', 'hello', 'here,'], 0), (['here,', 'hello', 'there,', 'hello', 'everywhere', 'hello'], 0), (['there,', 'hello', 'everywhere', 'hello', 'here,', 'hello'], 0)], [])
 
-'''assert len(Kwic.Kwic(test1)) >= expectedLen
+assert len(Kwic.Kwic(test1)) >= expectedLen
 #basic test to see if implementation of kwic0.py works as expected
 #caught errors with more than two indexs created an infinite for loop
 test2 = "hello cool is \n That is cool \n that is \n cool"
@@ -71,4 +71,4 @@ assert len(Kwic.Kwic(test4)) >= expectedLen
 
 #two different variables
 test4 = "that is cool butt \n that is cool"
-assert len(Kwic.Kwic(test4)) >= expectedLen'''
+assert len(Kwic.Kwic(test4)) >= expectedLen
